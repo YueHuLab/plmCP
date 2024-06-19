@@ -24,30 +24,48 @@ def read_fasta(fn_fasta):
     return list(prot2seq.keys()), prot2seq
 def read_CP_fasta(fn_fasta):
     prot2seq = {}
+    listseq = []
+    listprot = []
+    listrecord = []
     with open(fn_fasta) as handle:
         for record in SeqIO.parse(handle, "fasta"):
             seq = str(record.seq)
             seq= seq + seq #huyue 
             prot = record.id
             prot2seq[prot] = seq
+            listseq.append(seq)
+            listprot.append(prot)
+            record.seq=record.seq+record.seq
+            listrecord.append(record)
+        #short_seq_iterator = (record for record in SeqIO.parse(handle, "fasta"): record.seq=record.seq+record.seq)
+    #input_seq_iterator = SeqIO.parse("", "genbank")
+    #short_seq_iterator = (record for record in SeqIO.parse(handle, "fasta") record.seq=record.seq+record.seq)
+    #SeqIO.write(short_seq_iterator, "short_seqs.fasta", "fasta")
     #record = SeqRecord(Seq(seq), id=prot, description="CPsequence")
-    record = SeqRecord(Seq(seq), id=prot, description="")
-    output_file = "example/CP_output.fasta"
-    SeqIO.write(record, output_file, "fasta")
+    #record = SeqRecord(Seq(seq), id=prot, description="")
+    #record = SeqRecord(Seq(listseq), id=listprot, description="")
+    #output_file = "example/CP_output.fasta"
+    #SeqIO.write(record, output_file, "fasta")
+    SeqIO.write(listrecord, "example/CP_output.fasta", "fasta")
 
     return list(prot2seq.keys()), prot2seq
 def read_CP_target_fasta(fn_fasta):
     prot2seq = {}
+    listrecord = []
     with open(fn_fasta) as handle:
         for record in SeqIO.parse(handle, "fasta"):
             seq = str(record.seq)
             seq= seq + seq #huyue 
             prot = record.id
             prot2seq[prot] = seq
+            record.seq=record.seq+record.seq
+            listrecord.append(record)
     #record = SeqRecord(Seq(seq), id=prot, description="CPsequence")
-    record = SeqRecord(Seq(seq), id=prot, description="")
-    output_file = "example/CP_target_output.fasta"
-    SeqIO.write(record, output_file, "fasta")
+    #record = SeqRecord(Seq(seq), id=prot, description="")
+    #record = SeqRecord(Seq(prot2seq), id=prot, description="")
+    #output_file = "example/CP_target_output.fasta"
+    #SeqIO.write(record, output_file, "fasta")
+    SeqIO.write(listrecord, "example/CP_target_output.fasta", "fasta")
 
     return list(prot2seq.keys()), prot2seq
 
@@ -173,6 +191,8 @@ def draw_alignment(coords: List[Tuple[int, int]], seq1: str, seq2: str, output: 
 		raise KeyError(f'mismatch between seq1 length and coords {lp2} - {len(seq2)}')
 
 	# container
+	#alignment = dict(up=[], relation=[], down=[],upIndex=[],downIndex=[])
+	#alignment = dict(up=[], relation=[], down=[], Index=[])
 	alignment = dict(up=[], relation=[], down=[])
 	c1_prev, c2_prev = -1, -1
 	
@@ -199,6 +219,15 @@ def draw_alignment(coords: List[Tuple[int, int]], seq1: str, seq2: str, output: 
 		alignment['up'].append(up)
 		alignment['relation'].append(relation)
 		alignment['down'].append(down)
+                #indexC1C2 = str(c1)
+		#indexC1C2 = c1 + '\t'
+                #indexC1C2=str(c1) + '\t' + str(c2) + ';'
+		#alignment['Index'].append(indexC1C2)
+                #alignment['Index'].append(indexC1C2)
+		#string = ''.join(alignment['up']) + '\n'
+                #alignment['Index'].append(c1','c2';')
+                #alignment['Index'].append(c1)
+		#alignment['downIndex'].append(c2)
 			
 		c1_prev = c1
 		c2_prev = c2
@@ -207,6 +236,7 @@ def draw_alignment(coords: List[Tuple[int, int]], seq1: str, seq2: str, output: 
 		string = ''.join(alignment['up']) + '\n'
 		string += ''.join(alignment['relation']) + '\n'
 		string += ''.join(alignment['down'])
+		#string += ''.join(alignment['Index'])
 		if output is not None:
 			return string
 		else:

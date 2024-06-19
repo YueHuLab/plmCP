@@ -24,10 +24,10 @@ def esm_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home
     dataset = FastaBatchedDataset.from_file(fasta)
     batches = dataset.get_batch_indices(16384, extra_toks_per_seq=1)
     data_loader = torch.utils.data.DataLoader(
-        dataset, collate_fn=alphabet.get_batch_converter(1022), batch_sampler=batches
+        dataset, collate_fn=alphabet.get_batch_converter(1022), batch_sampler=batches,shuffle=False #huyue
     )
     print(f"Read {fasta} with {len(dataset)} sequences")
-
+#huyue
     embedding_result_dic = {}
     with torch.no_grad():
         for batch_idx, (labels, strs, toks) in enumerate(data_loader):
