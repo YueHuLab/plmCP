@@ -196,4 +196,3 @@ dependencies:
       - sentencepiece==0.2.0
       - tokenizers==0.10.3
       - transformers==4.5.1
-prefix: /home/data/t030413/miniconda3/envs/plmCP
