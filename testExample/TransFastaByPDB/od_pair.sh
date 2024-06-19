@@ -1,0 +1,1 @@
+ awk '{print "plmCP_fisher_pipelineWithAAid(~/PLMalign/plmCP/testExample/TransFastaAndID/"$1".fasta, ~/PLMalign/plmCP/testExample/TransFastaAndID/"$2".fasta,~/PLMalign/plmCP/testExample/TransFastaAndID/"$1".id, ~/PLMalign/plmCP/testExample/TransFastaAndID/"$2".id)"}' id_pair.txt > plm_t_withiD.sh
