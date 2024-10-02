@@ -10,12 +10,15 @@ conda activate plmCP
 Follow the steps in requirements_plmCP.sh
 
 ### Important 
-Please give the directory of the ESM-1b model in the plmcp/embedding_generate.py file
+Please give the directory of the ESM-1b, ESM-2, ProtT5 model in the plmcp/embedding_generate.py file
 Replace it.
-# esm1b 
+# esm1b (esm_embedding_generate function)
 esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt'
-# or esm2
+# or esm2 (esm_embedding_generate function)
 esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm2_t33_650M_UR50D.pt'
+# or ProtT5 (prottrans_embedding_generate fucntion) and for ProtT5 you should also change the embedding function in plmCP.py
+prottrans_model_path='/home/data/t030413/PLMalign/data/prot_t5_xl_uniref50' 
+
 ## run tests
 python test_site_2PEL_3CNA.py
 #
@@ -24,6 +27,9 @@ python test_RPIC_typeP_fromPDBtoFasta.py
 python test_site_RPIC.py
 #
 python test_site_RPIC_reverse.py
+
+### most simple test and no residue id information
+python test_2PEL_3CNA.py
 
 ## Citation
 Hu Y, Huang B. Zang C.Z. Detection of circular permutations by Protein Language Models.
