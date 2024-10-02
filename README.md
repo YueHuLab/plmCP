@@ -4,13 +4,15 @@ This is the implement of plmCP, a sequence-based, non-linear, flexible protein a
 
 ## Install directly using Conda
 conda env create -f environment.yml
+  # activate
 conda activate plmCP
 ## Install step by step using the Requirements file
 Follow the steps in requirements_plmCP.sh
-##Important 
+
+### Important 
 Please give the directory of the ESM-1b model in the plmcp/embedding_generate.py file
 Replace it.
-
+# 
 esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt'
 
 ##run tests
