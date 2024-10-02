@@ -28,10 +28,10 @@ python test_site_RPIC_reverse.py
 ## Citation
 Hu Y, Huang B. Zang C.Z. Detection of circular permutations by Protein Language Models.
 
-##License
+## License
 MIT license, See LICENSE file
 The codes are based on the PLMalign (MIT license).Importantly, it change to the classical backtracking algorithm in Simth-Waterman algorithm.
-##tips
+## tips
 The fasta file and fasta id file can be obtained from PDB file using the tools pdb2fasta.sh and pdb2Spit.sh in testExample/TransFastaAndID/ directory.
 Please not that the fasta id file is not necessary needed. It was used to compare the result to the TMAlign and ICARUS conveniently with the animo acids ID.
 In test_RPIC_typeP_fromPDBtoFasta.py, it give a example using only the fasta file.
