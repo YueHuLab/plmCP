@@ -42,3 +42,6 @@ The fasta file and fasta id file can be obtained from PDB file using the tools p
 Please not that the fasta id file is not necessary needed. It was used to compare the result to the TMAlign and ICARUS conveniently with the animo acids ID.
 In test_RPIC_typeP_fromPDBtoFasta.py, it give a example using only the fasta file.
 The query and target can exchange their positions. For more details, please observe the different between test_site_RPIC.py and test_site_RPIC_reverse.py.
+## run it online on CodeOcean
+We provide a code ocean version to run it by yourself.
+https://codeocean.com/capsule/8856481/tree/v1
