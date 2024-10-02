@@ -12,13 +12,17 @@ Follow the steps in requirements_plmCP.sh
 ### Important 
 Please give the directory of the ESM-1b model in the plmcp/embedding_generate.py file
 Replace it.
-# 
+# esm1b 
 esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt'
-
-##run tests
+# or esm2
+esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm2_t33_650M_UR50D.pt'
+## run tests
 python test_site_2PEL_3CNA.py
+#
 python test_RPIC_typeP_fromPDBtoFasta.py
+#
 python test_site_RPIC.py
+#
 python test_site_RPIC_reverse.py
 
 ## Citation
