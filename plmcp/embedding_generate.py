@@ -7,9 +7,16 @@ import torch
 from tqdm import tqdm
 from pathlib import Path
 
+#huyue
+import numpy as np
 from esm import Alphabet, FastaBatchedDataset, ProteinBertModel, pretrained, MSATransformer
+#huyue
+def empty_cache():
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
-def esm_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt', nogpu = False):
+
+def esm_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt', nogpu = False,window=500, shift=300):
     esm_model, alphabet = pretrained.load_model_and_alphabet(esm_model_path)
     esm_model.eval()
     if isinstance(esm_model, MSATransformer):
@@ -36,8 +43,57 @@ def esm_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home
             )
             if torch.cuda.is_available() and not nogpu:
                toks = toks.to(device="cuda", non_blocking=True)
+############
+            device = torch.device('cuda:0' if torch.cuda.is_available() and not nogpu else 'cpu')
+            L = toks.shape[-1]
+            idx_pdb = torch.arange(L).long().view(1, L)
 
-            out = esm_model(toks, repr_layers=[33], return_contacts=False)["representations"][33]
+            # esm-1b can only handle toksuences with <1024 AAs
+            # run esm-1b by crops if length > 1000
+            if L > 1000:
+                out = torch.zeros((L, 1280), device=device)
+                count_1d = torch.zeros((L), device=device)
+                #
+                grids = np.arange(0, L - window + shift, shift)
+                ngrids = grids.shape[0]
+                print("ngrid:     ", ngrids)
+                print("grids:     ", grids)
+                print("windows:   ", window)
+
+                for i in range(ngrids):
+                    for j in range(i, ngrids):
+                        start_1 = grids[i]
+                        end_1 = min(grids[i] + window, L)
+                        start_2 = grids[j]
+                        end_2 = min(grids[j] + window, L)
+                        sel = np.zeros((L)).astype(np.bool_)
+                        sel[start_1:end_1] = True
+                        sel[start_2:end_2] = True
+
+                        input_toks = toks[:, sel]
+                        input_idx = idx_pdb[:, sel]
+
+                        print("running crop: %d-%d/%d-%d" % (start_1, end_1, start_2, end_2), input_toks.shape)
+                        with torch.cuda.amp.autocast(enabled=False):
+                            sub_out = esm_model(input_toks, repr_layers=[33], return_contacts=False)["representations"][33]
+                        empty_cache()
+
+                        weight = 1
+                        sub_idx = input_idx[0].cpu()
+                        count_1d[sub_idx] += weight
+
+                        #out[sub_idx] += weight * sub_out.squeeze(0)[1:-1]
+                        out[sub_idx] += weight * sub_out.squeeze(0)
+                        #out[sub_idx] += weight * sub_out
+                        del sub_out
+                        empty_cache()
+
+                out /= count_1d[:, None]
+                out=out.unsqueeze(0)
+            else:
+
+#############
+                out = esm_model(toks, repr_layers=[33], return_contacts=False)["representations"][33]
 
             for i, label in enumerate(labels):
                 #get mean embedding
