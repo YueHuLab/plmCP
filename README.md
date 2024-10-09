@@ -11,7 +11,7 @@ Follow the steps in requirements_plmCP.sh
 
 ### Important 
 Please give the directory of the ESM-1b, ESM-2, ProtT5 model in the plmcp/embedding_generate.py file
-Replace it.
+Replace it. There are four branches now.
 # esm1b (esm_embedding_generate function)
 esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt'
 # https://github.com/YueHuLab/plmCP/tree/main
@@ -23,6 +23,8 @@ prottrans_model_path='/home/data/t030413/PLMalign/data/prot_t5_xl_uniref50'
 # https://github.com/YueHuLab/plmCP/tree/ProtT5
 # we also build a version to extend the length of tokens by slide window, inspired by trRosetta
 # https://github.com/YueHuLab/plmCP/tree/SlideWindow
+# online running by Code Ocean
+# https://codeocean.com/capsule/8856481/tree/v1
 
 ## run tests
 python test_site_2PEL_3CNA.py
