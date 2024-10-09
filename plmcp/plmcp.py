@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 from .plmcp_util.alignment import plmcp_gather_all_paths, plmcp_search_paths
 from .util import filter_result_dataframe, dot_product, read_fasta, embedding_load, embedding_cos_similarity, make_parent_dir, draw_alignment, read_CP_fasta,read_CP_target_fasta
-from .embedding_generate import esm_embedding_generate
+from .embedding_generate import prottrans_embedding_generate
 
 import scipy
 class plmcp:
@@ -108,15 +108,15 @@ def plmCP_fisher_pipeline(query_fasta, target_fasta, mode = 'local', query_embed
     query_CP_fasta= "example/CP_output.fasta"
     target_CP_fasta= "example/CP_target_output.fasta"
     if (query_embedding_path == None):
-        query_embeddings = esm_embedding_generate(query_fasta)
+        query_embeddings = prottrans_embedding_generate(query_fasta)
     else:
         query_embeddings = embedding_load(query_fasta, query_embedding_path)
     #query CP huyue
-    query_CP_embeddings = esm_embedding_generate(query_CP_fasta)
-    target_CP_embeddings = esm_embedding_generate(target_CP_fasta)
+    query_CP_embeddings = prottrans_embedding_generate(query_CP_fasta)
+    target_CP_embeddings = prottrans_embedding_generate(target_CP_fasta)
 
     if (target_embedding_path == None):
-        target_embeddings = esm_embedding_generate(target_fasta)
+        target_embeddings = prottrans_embedding_generate(target_fasta)
     else:
         target_embeddings = embedding_load(target_fasta, target_embedding_path)
     #print 
@@ -489,15 +489,15 @@ def plmCP_fisher_pipelineWithAAid(query_fasta, target_fasta, query_AA_id ,target
 
 
     if (query_embedding_path == None):
-        query_embeddings = esm_embedding_generate(query_fasta)
+        query_embeddings = prottrans_embedding_generate(query_fasta)
     else:
         query_embeddings = embedding_load(query_fasta, query_embedding_path)
     #query CP huyue
-    query_CP_embeddings = esm_embedding_generate(query_CP_fasta)
-    target_CP_embeddings = esm_embedding_generate(target_CP_fasta)
+    query_CP_embeddings = prottrans_embedding_generate(query_CP_fasta)
+    target_CP_embeddings = prottrans_embedding_generate(target_CP_fasta)
 
     if (target_embedding_path == None):
-        target_embeddings = esm_embedding_generate(target_fasta)
+        target_embeddings = prottrans_embedding_generate(target_fasta)
     else:
         target_embeddings = embedding_load(target_fasta, target_embedding_path)
     #print 
@@ -884,15 +884,15 @@ def plmCP_fisher_pipelineWithAAidReverse(target_fasta,query_fasta, target_AA_id,
 
 
     if (query_embedding_path == None):
-        query_embeddings = esm_embedding_generate(query_fasta)
+        query_embeddings = prottrans_embedding_generate(query_fasta)
     else:
         query_embeddings = embedding_load(query_fasta, query_embedding_path)
     #query CP huyue
-    query_CP_embeddings = esm_embedding_generate(query_CP_fasta)
-    target_CP_embeddings = esm_embedding_generate(target_CP_fasta)
+    query_CP_embeddings = prottrans_embedding_generate(query_CP_fasta)
+    target_CP_embeddings = prottrans_embedding_generate(target_CP_fasta)
 
     if (target_embedding_path == None):
-        target_embeddings = esm_embedding_generate(target_fasta)
+        target_embeddings = prottrans_embedding_generate(target_fasta)
     else:
         target_embeddings = embedding_load(target_fasta, target_embedding_path)
     #print 
