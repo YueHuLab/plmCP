@@ -14,10 +14,15 @@ Please give the directory of the ESM-1b, ESM-2, ProtT5 model in the plmcp/embedd
 Replace it.
 # esm1b (esm_embedding_generate function)
 esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt'
+# https://github.com/YueHuLab/plmCP/tree/main
 # or esm2 (esm_embedding_generate function)
 esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm2_t33_650M_UR50D.pt'
+#  https://github.com/YueHuLab/plmCP/tree/esm2
 # or ProtT5 (prottrans_embedding_generate fucntion) and for ProtT5 you should also change the embedding function in plmCP.py
 prottrans_model_path='/home/data/t030413/PLMalign/data/prot_t5_xl_uniref50' 
+# https://github.com/YueHuLab/plmCP/tree/ProtT5
+# we also build a version to extend the length of tokens by slide window, inspired by trRosetta
+# https://github.com/YueHuLab/plmCP/tree/SlideWindow
 
 ## run tests
 python test_site_2PEL_3CNA.py
