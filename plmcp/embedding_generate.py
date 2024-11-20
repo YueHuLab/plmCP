@@ -9,7 +9,7 @@ from pathlib import Path
 
 from esm import Alphabet, FastaBatchedDataset, ProteinBertModel, pretrained, MSATransformer
 
-def esm_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt', nogpu = False):
+def esm_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm2_t33_650M_UR50D.pt', nogpu = False):
     esm_model, alphabet = pretrained.load_model_and_alphabet(esm_model_path)
     esm_model.eval()
     if isinstance(esm_model, MSATransformer):
@@ -168,7 +168,7 @@ def prottrans_embedding_generate(fasta,
     print('\n############# STATS #############')
     print('Total number of embeddings: {}'.format(len(emb_dict)))
     return emb_dict
-def esm_CP_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm1b_t33_650M_UR50S.pt', nogpu = False):
+def esm_CP_embedding_generate(fasta, embedding_path = None, esm_model_path = '/home/data/t030413/.cache/torch/hub/checkpoints/esm2_t33_650M_UR50D.pt', nogpu = False):
     esm_model, alphabet = pretrained.load_model_and_alphabet(esm_model_path)
     esm_model.eval()
     if isinstance(esm_model, MSATransformer):
