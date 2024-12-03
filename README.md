@@ -34,6 +34,10 @@ python test_RPIC_typeP_fromPDBtoFasta.py
 python test_site_RPIC.py
 #
 python test_site_RPIC_reverse.py
+## slide windows hyperparameter test
+We tested different window lengths (300, 400 and 500) and shift lengths (100, 200 and 300) and found that the alignment length and score were generally consistent, demonstrating that our method has robustness within a certain range.This test was conducted using 2mta_H and 1kv9_A, and can be run with test_1201_slide.py. The length of 1kv9_A is 664, and after duplication, it reaches 1328, which will trigger the slide windows setting. This program uses a double-window strategy to slide over different parts of the sequence. By combining each pair of windows, it extracts features to capture long-range interactions within the sequence. Each position is accessed multiple times to enhance the robustness of feature representation. The final result is obtained by averaging the features from multiple windows to achieve a more stable representation. The double-window approach allows the model to capture interactions between different parts of the sequence, enhancing the representation by providing richer context information.
+
+
 
 ### most simple test and no residue id information
 python test_2PEL_3CNA.py
