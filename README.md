@@ -43,7 +43,7 @@ We tested different window lengths (300, 400 and 500) and shift lengths (100, 20
 python test_2PEL_3CNA.py
 
 ## Citation
-Hu Y, Huang B. Zang C.Z. Detection of circular permutations by Protein Language Models.
+Hu, Yue, Bin Huang, Chun Zi Zang, and Jia Jie Xu. "Detection of circular permutations by Protein Language Models." Computational and Structural Biotechnology Journal 27 (2025): 214-220.
 
 ## License
 MIT license, See LICENSE file
