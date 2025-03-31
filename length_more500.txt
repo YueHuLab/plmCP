@@ -1,0 +1,17 @@
+    514 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1hzv_A.id
+    521 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1hzu_A.id
+    537 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1st8_A.id
+    559 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1gq1_A.id
+    591 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1fwx_A.id
+    597 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/2d0v_A.id
+    600 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1lrw_A.id
+    601 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1eut_A.id
+    601 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1wcq_A.id
+    601 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/2bzd_A.id
+    619 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1gsz_A.id
+    621 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1olz_A.id
+    623 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/2sqc_A.id
+    639 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1gof_A.id
+    639 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1t2x_A.id
+    664 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/1kv9_A.id
+    665 /home/data/t030413/foldseek/database/data_pdb/fastSinDup/readable/download2/2d5l_A.id

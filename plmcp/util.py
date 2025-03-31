@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 from Bio import SeqIO
 from pathlib import Path
-
+import re
 #huyue
 from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
@@ -69,6 +69,99 @@ def read_CP_target_fasta(fn_fasta):
 
     return list(prot2seq.keys()), prot2seq
 
+from Bio import SeqIO
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from io import StringIO
+
+def read_target_fasta_to_files(fn_fasta):
+    prot2seq = {}
+    listrecord_target = []
+    listrecord_CP = []
+    # 如果输入是一行字符串，将其转换为伪装的 FASTA 格式
+    if not fn_fasta.startswith(">"):
+        fn_fasta = ">sequenceTarget\n" + fn_fasta       
+    # Use StringIO to create a file-like object from the input string
+    handle = StringIO(fn_fasta)
+    # Parse the input FASTA string
+    seq_list = []  # Default value to avoid UnboundLocalError
+    seq_CP_list = []  # Default value to avoid UnboundLocalError    
+    # Parse the input FASTA string
+
+	
+
+
+    # 解析输入的 FASTA 字符串
+    for record in SeqIO.parse(handle, "fasta"):
+        # 提取原始序列并去除首尾空白字符
+        seq = str(record.seq).strip()
+        seq = re.sub(r'\s+', '', seq)
+        seq_list.append(seq)
+
+        # 保存去除空白字符后的原始序列
+        prot = record.id
+        prot2seq[prot] = seq
+        record_target = SeqRecord(Seq(seq), id=prot, description=record.description)
+        listrecord_target.append(record_target)
+
+        # 创建一个新的序列，将原始序列复制两次
+        seq_CP = seq + seq  # 复制序列
+        seq_CP_list.append(seq_CP)
+        
+        # 创建新的 SeqRecord 对象，包含复制后的序列
+        record_CP = SeqRecord(Seq(seq_CP), id=prot, description="TargetCPsequence")
+        listrecord_CP.append(record_CP)	
+    # Write the sequences to two separate FASTA files
+    SeqIO.write(listrecord_target, "example/target_output.fasta", "fasta")
+    SeqIO.write(listrecord_CP, "example/CP_target_output.fasta", "fasta")	
+	
+	
+    # Return the list of protein IDs and the dictionary mapping IDs to sequences
+    return seq_list, seq_CP_list
+
+def read_query_fasta_to_files(fn_fasta):
+    prot2seq = {}
+    listrecord_target = []
+    listrecord_CP = []
+    # 如果输入是一行字符串，将其转换为伪装的 FASTA 格式
+    if not fn_fasta.startswith(">"):
+        fn_fasta = ">sequenceQuery\n" + fn_fasta    
+    # Use StringIO to create a file-like object from the input string
+    handle = StringIO(fn_fasta)
+    # Parse the input FASTA string
+    seq_list = []  # Default value to avoid UnboundLocalError
+    seq_CP_list = []  # Default value to avoid UnboundLocalError      
+
+	
+    # 解析输入的 FASTA 字符串
+    for record in SeqIO.parse(handle, "fasta"):
+        # 提取原始序列并去除首尾空白字符
+        seq = str(record.seq).strip()
+        seq = re.sub(r'\s+', '', seq)
+        seq_list.append(seq)
+
+        # 保存去除空白字符后的原始序列
+        prot = record.id
+        prot2seq[prot] = seq
+        record_target = SeqRecord(Seq(seq), id=prot, description=record.description)
+        listrecord_target.append(record_target)
+
+        # 创建一个新的序列，将原始序列复制两次
+        seq_CP = seq + seq  # 复制序列
+        seq_CP_list.append(seq_CP)
+        
+        # 创建新的 SeqRecord 对象，包含复制后的序列
+        record_CP = SeqRecord(Seq(seq_CP), id=prot, description="QueryCPsequence")
+        listrecord_CP.append(record_CP)			
+		
+		
+    # Write the sequences to two separate FASTA files
+    SeqIO.write(listrecord_target, "example/query_output.fasta", "fasta")
+    SeqIO.write(listrecord_CP, "example/CP_query_output.fasta", "fasta")
+
+    # Return the list of protein IDs and the dictionary mapping IDs to sequences
+    return seq_list, seq_CP_list
+	
 def make_parent_dir(path):
     filepath = Path(path)
     filepath.parent.mkdir(parents=True, exist_ok=True)
